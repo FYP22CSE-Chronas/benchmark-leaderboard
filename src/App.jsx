@@ -26,10 +26,6 @@ export default function App() {
     [],
   );
 
-  const levelCount = useMemo(
-    () => Object.values(data.byLevel).reduce((sum, rows) => sum + rows.length, 0),
-    [],
-  );
   const leader = entries[0];
 
   return (
@@ -56,10 +52,6 @@ export default function App() {
           <div className="stat">
             <div className="stat__k">Datasets</div>
             <div className="stat__v">{data.overall.length}</div>
-          </div>
-          <div className="stat">
-            <div className="stat__k">Level rows</div>
-            <div className="stat__v">{levelCount}</div>
           </div>
           <div className="stat">
             <div className="stat__k">Leader</div>
