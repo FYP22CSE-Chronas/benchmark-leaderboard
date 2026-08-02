@@ -1,11 +1,14 @@
 /**
  * Leaderboard scoring for the hierarchical time-series benchmark.
  *
- * The ranking is deliberately simple: models are ordered by their mean sCRPS
- * over the datasets in the overall table. Lower is better, ties broken by the
- * number of datasets won. Nothing else feeds the ranking — no weights, no
- * composite. Coverage and wins are reported alongside as context only, because
- * a model that skipped a dataset is averaging over an easier set.
+ * Models are ranked by their average positional rank across datasets.
+ * On each dataset, models are ranked 1, 2, 3, ... by sCRPS (lower is better).
+ * Models that did not run on a dataset are assigned last place.
+ * A model's leaderboard position is the average of its ranks across all datasets.
+ *
+ * This method rewards consistency and reliability across diverse datasets.
+ * A model that places 2nd on every dataset ranks higher than one that wins once
+ * and bombs the rest — and coverage gaps are naturally penalized.
  */
 
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
@@ -40,8 +43,8 @@ export function worstInRow(row, models) {
 }
 
 /**
- * Ranks models by mean sCRPS across the overall table.
- * @returns {Array<object>} sorted best-first, each entry carrying `avgSCRPS`,
+ * Ranks models by average positional rank across all datasets.
+ * @returns {Array<object>} sorted best-first, each entry carrying `avgRank`,
  *   `covered`, `datasetCount`, `wins` and its 1-based `rank`.
  */
 export function computeLeaderboard(data) {
@@ -49,41 +52,52 @@ export function computeLeaderboard(data) {
   const overall = data.overall;
   const datasetCount = overall.length;
 
+  // Per-dataset ranks: dataset -> (model -> rank)
+  const datasetRanks = new Map(
+    overall.map((row) => [row.dataset, rankRow(row, models)]),
+  );
+
+  // Per-dataset best values (for win counting)
   const bestPerDataset = new Map(
     overall.map((row) => [row.dataset, bestInRow(row, models)]),
   );
 
   const entries = models.map((model) => {
-    let sum = 0;
+    let rankSum = 0;
     let covered = 0;
     let wins = 0;
 
     for (const row of overall) {
       const value = row[model];
-      if (!isNum(value)) continue;
-      covered += 1;
-      sum += value;
-      if (value === bestPerDataset.get(row.dataset)) wins += 1;
+      const ranks = datasetRanks.get(row.dataset);
+
+      if (isNum(value)) {
+        // Model ran on this dataset: use its actual rank.
+        const rank = ranks.get(model);
+        rankSum += rank;
+        covered += 1;
+        if (value === bestPerDataset.get(row.dataset)) wins += 1;
+      } else {
+        // Model did not run: assign last place (one past the last competitor).
+        const lastPlace = Math.max(...ranks.values()) + 1;
+        rankSum += lastPlace;
+      }
     }
 
     return {
       model,
-      avgSCRPS: covered ? sum / covered : null,
+      avgRank: rankSum / datasetCount,
       covered,
       datasetCount,
       wins,
     };
   });
 
-  // Models with no result at all sink to the bottom rather than sorting on NaN.
-  entries.sort((a, b) => {
-    if (a.avgSCRPS === null) return 1;
-    if (b.avgSCRPS === null) return -1;
-    return a.avgSCRPS - b.avgSCRPS || b.wins - a.wins;
-  });
+  // Sort by average rank (ascending = best).
+  entries.sort((a, b) => a.avgRank - b.avgRank);
   entries.forEach((entry, i) => {
     entry.rank =
-      i > 0 && entry.avgSCRPS === entries[i - 1].avgSCRPS ? entries[i - 1].rank : i + 1;
+      i > 0 && entry.avgRank === entries[i - 1].avgRank ? entries[i - 1].rank : i + 1;
   });
   return entries;
 }

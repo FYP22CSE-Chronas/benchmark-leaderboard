@@ -8,19 +8,19 @@
     "HierE2E",
     "PERMBU-MinT",
     "SHARQ",
-    "PROFHiT",
-    "Bootstrap-BU (not coherent)",
-    "ARIMA (not coherent)"
+    "PROFHIT *",
+    "Bootstrap-BU *",
+    "ARIMA *"
   ],
   "levelModels": [
     "CLOVER (crps)",
     "DPMN-GroupBU",
     "HierE2E",
     "PERMBU-MinT",
-    "Bootstrap-BU (not coherent)",
-    "ARIMA (not coherent)",
+    "Bootstrap-BU *",
+    "ARIMA *",
     "SHARQ",
-    "PROFHiT"
+    "PROFHIT *"
   ],
   "overall": [
     {
@@ -29,10 +29,10 @@
       "DPMN-GroupBU": 0.0102,
       "HierE2E": 0.0171,
       "PERMBU-MinT": 0.0067,
-      "Bootstrap-BU (not coherent)": 0.0076,
-      "ARIMA (not coherent)": 0.007,
+      "Bootstrap-BU *": 0.0076,
+      "ARIMA *": 0.007,
       "SHARQ": 0.0494,
-      "PROFHiT": 0.2018
+      "PROFHIT *": 0.2018
     },
     {
       "dataset": "Traffic",
@@ -40,10 +40,10 @@
       "DPMN-GroupBU": 0.0907,
       "HierE2E": 0.0375,
       "PERMBU-MinT": 0.0677,
-      "Bootstrap-BU (not coherent)": 0.0736,
-      "ARIMA (not coherent)": 0.0751,
+      "Bootstrap-BU *": 0.0736,
+      "ARIMA *": 0.0751,
       "SHARQ": 0.1001,
-      "PROFHiT": 0.1104
+      "PROFHIT *": 0.1104
     },
     {
       "dataset": "Tourism-S",
@@ -51,10 +51,10 @@
       "DPMN-GroupBU": 0.074,
       "HierE2E": 0.0761,
       "PERMBU-MinT": 0.0812,
-      "Bootstrap-BU (not coherent)": 0.0703,
-      "ARIMA (not coherent)": 0.0759,
+      "Bootstrap-BU *": 0.0703,
+      "ARIMA *": 0.0759,
       "SHARQ": 0.1086,
-      "PROFHiT": 0.0991
+      "PROFHIT *": 0.0991
     },
     {
       "dataset": "Tourism-L",
@@ -62,10 +62,10 @@
       "DPMN-GroupBU": 0.1249,
       "HierE2E": 0.1472,
       "PERMBU-MinT": null,
-      "Bootstrap-BU (not coherent)": 0.1375,
-      "ARIMA (not coherent)": 0.1416,
+      "Bootstrap-BU *": 0.1375,
+      "ARIMA *": 0.1416,
       "SHARQ": 0.2071,
-      "PROFHiT": 0.3989
+      "PROFHIT *": 0.3989
     },
     {
       "dataset": "Wiki",
@@ -73,10 +73,10 @@
       "DPMN-GroupBU": 0.3158,
       "HierE2E": 0.2592,
       "PERMBU-MinT": 0.4008,
-      "Bootstrap-BU (not coherent)": 0.2816,
-      "ARIMA (not coherent)": 0.3907,
+      "Bootstrap-BU *": 0.2816,
+      "ARIMA *": 0.3907,
       "SHARQ": 0.3607,
-      "PROFHiT": 0.3398
+      "PROFHIT *": 0.3398
     },
     {
       "dataset": "Favorita",
@@ -84,10 +84,10 @@
       "DPMN-GroupBU": 0.402,
       "HierE2E": 0.5298,
       "PERMBU-MinT": 0.467,
-      "Bootstrap-BU (not coherent)": 0.411,
-      "ARIMA (not coherent)": 0.4373,
+      "Bootstrap-BU *": 0.411,
+      "ARIMA *": 0.4373,
       "SHARQ": null,
-      "PROFHiT": null
+      "PROFHIT *": null
     }
   ],
   "byLevel": {
@@ -98,10 +98,10 @@
         "DPMN-GroupBU": 0.0033,
         "HierE2E": 0.0052,
         "PERMBU-MinT": 0.0013,
-        "Bootstrap-BU (not coherent)": 0.0017,
-        "ARIMA (not coherent)": 0.0017,
+        "Bootstrap-BU *": 0.0017,
+        "ARIMA *": 0.0017,
         "SHARQ": 0.0481,
-        "PROFHiT": 0.2064
+        "PROFHIT *": 0.2064
       },
       {
         "level": "2 (geo.)",
@@ -109,10 +109,10 @@
         "DPMN-GroupBU": 0.0088,
         "HierE2E": 0.0181,
         "PERMBU-MinT": 0.0045,
-        "Bootstrap-BU (not coherent)": 0.0053,
-        "ARIMA (not coherent)": 0.0044,
+        "Bootstrap-BU *": 0.0053,
+        "ARIMA *": 0.0044,
         "SHARQ": 0.049,
-        "PROFHiT": 0.2014
+        "PROFHIT *": 0.2014
       },
       {
         "level": "3 (geo.)",
@@ -120,10 +120,10 @@
         "DPMN-GroupBU": 0.0115,
         "HierE2E": 0.0188,
         "PERMBU-MinT": 0.0076,
-        "Bootstrap-BU (not coherent)": 0.0086,
-        "ARIMA (not coherent)": 0.0076,
+        "Bootstrap-BU *": 0.0086,
+        "ARIMA *": 0.0076,
         "SHARQ": 0.049,
-        "PROFHiT": 0.1988
+        "PROFHIT *": 0.1988
       },
       {
         "level": "4 (geo.)",
@@ -131,10 +131,10 @@
         "DPMN-GroupBU": 0.0173,
         "HierE2E": 0.0262,
         "PERMBU-MinT": 0.0133,
-        "Bootstrap-BU (not coherent)": 0.0148,
-        "ARIMA (not coherent)": 0.0138,
+        "Bootstrap-BU *": 0.0148,
+        "ARIMA *": 0.0138,
         "SHARQ": 0.0515,
-        "PROFHiT": 0.2006
+        "PROFHIT *": 0.2006
       }
     ],
     "Traffic": [
@@ -144,10 +144,10 @@
         "DPMN-GroupBU": 0.0397,
         "HierE2E": 0.0183,
         "PERMBU-MinT": 0.0331,
-        "Bootstrap-BU (not coherent)": 0.0468,
-        "ARIMA (not coherent)": 0.0376,
+        "Bootstrap-BU *": 0.0468,
+        "ARIMA *": 0.0376,
         "SHARQ": 0.0534,
-        "PROFHiT": 0.0752
+        "PROFHIT *": 0.0752
       },
       {
         "level": "2 (geo.)",
@@ -155,10 +155,10 @@
         "DPMN-GroupBU": 0.0537,
         "HierE2E": 0.0183,
         "PERMBU-MinT": 0.0341,
-        "Bootstrap-BU (not coherent)": 0.0483,
-        "ARIMA (not coherent)": 0.0412,
+        "Bootstrap-BU *": 0.0483,
+        "ARIMA *": 0.0412,
         "SHARQ": 0.0616,
-        "PROFHiT": 0.0897
+        "PROFHIT *": 0.0897
       },
       {
         "level": "3 (geo.)",
@@ -166,10 +166,10 @@
         "DPMN-GroupBU": 0.0538,
         "HierE2E": 0.0209,
         "PERMBU-MinT": 0.0417,
-        "Bootstrap-BU (not coherent)": 0.053,
-        "ARIMA (not coherent)": 0.0549,
+        "Bootstrap-BU *": 0.053,
+        "ARIMA *": 0.0549,
         "SHARQ": 0.0801,
-        "PROFHiT": 0.0835
+        "PROFHIT *": 0.0835
       },
       {
         "level": "4 (geo.)",
@@ -177,10 +177,10 @@
         "DPMN-GroupBU": 0.2155,
         "HierE2E": 0.0974,
         "PERMBU-MinT": 0.1621,
-        "Bootstrap-BU (not coherent)": 0.1463,
-        "ARIMA (not coherent)": 0.1665,
+        "Bootstrap-BU *": 0.1463,
+        "ARIMA *": 0.1665,
         "SHARQ": 0.2052,
-        "PROFHiT": 0.1932
+        "PROFHIT *": 0.1932
       }
     ],
     "Tourism-S": [
@@ -190,10 +190,10 @@
         "DPMN-GroupBU": 0.0329,
         "HierE2E": 0.04,
         "PERMBU-MinT": 0.0375,
-        "Bootstrap-BU (not coherent)": 0.0335,
-        "ARIMA (not coherent)": 0.0354,
+        "Bootstrap-BU *": 0.0335,
+        "ARIMA *": 0.0354,
         "SHARQ": 0.0428,
-        "PROFHiT": 0.0571
+        "PROFHIT *": 0.0571
       },
       {
         "level": "2 (geo.)",
@@ -201,10 +201,10 @@
         "DPMN-GroupBU": 0.0502,
         "HierE2E": 0.0609,
         "PERMBU-MinT": 0.0679,
-        "Bootstrap-BU (not coherent)": 0.0507,
-        "ARIMA (not coherent)": 0.0709,
+        "Bootstrap-BU *": 0.0507,
+        "ARIMA *": 0.0709,
         "SHARQ": 0.0855,
-        "PROFHiT": 0.0846
+        "PROFHIT *": 0.0846
       },
       {
         "level": "3 (geo.)",
@@ -212,10 +212,10 @@
         "DPMN-GroupBU": 0.0914,
         "HierE2E": 0.0914,
         "PERMBU-MinT": 0.0959,
-        "Bootstrap-BU (not coherent)": 0.0845,
-        "ARIMA (not coherent)": 0.0848,
+        "Bootstrap-BU *": 0.0845,
+        "ARIMA *": 0.0848,
         "SHARQ": 0.1367,
-        "PROFHiT": 0.1157
+        "PROFHIT *": 0.1157
       },
       {
         "level": "4 (geo.)",
@@ -223,10 +223,10 @@
         "DPMN-GroupBU": 0.1212,
         "HierE2E": 0.1122,
         "PERMBU-MinT": 0.1234,
-        "Bootstrap-BU (not coherent)": 0.1124,
-        "ARIMA (not coherent)": 0.1125,
+        "Bootstrap-BU *": 0.1124,
+        "ARIMA *": 0.1125,
         "SHARQ": 0.1696,
-        "PROFHiT": 0.1389
+        "PROFHIT *": 0.1389
       }
     ],
     "Tourism-L": [
@@ -236,10 +236,10 @@
         "DPMN-GroupBU": 0.0431,
         "HierE2E": 0.0842,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.0622,
-        "ARIMA (not coherent)": 0.0263,
+        "Bootstrap-BU *": 0.0622,
+        "ARIMA *": 0.0263,
         "SHARQ": 0.0791,
-        "PROFHiT": 0.1299
+        "PROFHIT *": 0.1299
       },
       {
         "level": "2 (geo.)",
@@ -247,10 +247,10 @@
         "DPMN-GroupBU": 0.0637,
         "HierE2E": 0.1012,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.082,
-        "ARIMA (not coherent)": 0.0904,
+        "Bootstrap-BU *": 0.082,
+        "ARIMA *": 0.0904,
         "SHARQ": 0.1053,
-        "PROFHiT": 0.159
+        "PROFHIT *": 0.159
       },
       {
         "level": "3 (geo.)",
@@ -258,10 +258,10 @@
         "DPMN-GroupBU": 0.1084,
         "HierE2E": 0.1317,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.1207,
-        "ARIMA (not coherent)": 0.1389,
+        "Bootstrap-BU *": 0.1207,
+        "ARIMA *": 0.1389,
         "SHARQ": 0.1864,
-        "PROFHiT": 0.1924
+        "PROFHIT *": 0.1924
       },
       {
         "level": "4 (geo.)",
@@ -269,10 +269,10 @@
         "DPMN-GroupBU": 0.1554,
         "HierE2E": 0.1705,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.1646,
-        "ARIMA (not coherent)": 0.1878,
+        "Bootstrap-BU *": 0.1646,
+        "ARIMA *": 0.1878,
         "SHARQ": 0.258,
-        "PROFHiT": 0.4196
+        "PROFHIT *": 0.4196
       },
       {
         "level": "5 (prp.)",
@@ -280,10 +280,10 @@
         "DPMN-GroupBU": 0.07,
         "HierE2E": 0.0995,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.0788,
-        "ARIMA (not coherent)": 0.077,
+        "Bootstrap-BU *": 0.0788,
+        "ARIMA *": 0.077,
         "SHARQ": 0.1105,
-        "PROFHiT": 0.1299
+        "PROFHIT *": 0.1299
       },
       {
         "level": "6 (prp.)",
@@ -291,10 +291,10 @@
         "DPMN-GroupBU": 0.107,
         "HierE2E": 0.1336,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.1268,
-        "ARIMA (not coherent)": 0.127,
+        "Bootstrap-BU *": 0.1268,
+        "ARIMA *": 0.127,
         "SHARQ": 0.188,
-        "PROFHiT": 0.1403
+        "PROFHIT *": 0.1403
       },
       {
         "level": "7 (prp.)",
@@ -302,10 +302,10 @@
         "DPMN-GroupBU": 0.1887,
         "HierE2E": 0.1955,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.1949,
-        "ARIMA (not coherent)": 0.2022,
+        "Bootstrap-BU *": 0.1949,
+        "ARIMA *": 0.2022,
         "SHARQ": 0.3091,
-        "PROFHiT": 0.1981
+        "PROFHIT *": 0.1981
       },
       {
         "level": "8 (prp.)",
@@ -313,10 +313,10 @@
         "DPMN-GroupBU": 0.2629,
         "HierE2E": 0.2615,
         "PERMBU-MinT": null,
-        "Bootstrap-BU (not coherent)": 0.2698,
-        "ARIMA (not coherent)": 0.2834,
+        "Bootstrap-BU *": 0.2698,
+        "ARIMA *": 0.2834,
         "SHARQ": 0.4208,
-        "PROFHiT": 0.7694
+        "PROFHIT *": 0.7694
       }
     ],
     "Wiki": [
@@ -326,10 +326,10 @@
         "DPMN-GroupBU": 0.1709,
         "HierE2E": 0.1007,
         "PERMBU-MinT": 0.1886,
-        "Bootstrap-BU (not coherent)": 0.163,
-        "ARIMA (not coherent)": 0.1981,
+        "Bootstrap-BU *": 0.163,
+        "ARIMA *": 0.1981,
         "SHARQ": 0.1645,
-        "PROFHiT": 0.1088
+        "PROFHIT *": 0.1088
       },
       {
         "level": "2 (geo.)",
@@ -337,10 +337,10 @@
         "DPMN-GroupBU": 0.2299,
         "HierE2E": 0.1963,
         "PERMBU-MinT": 0.2691,
-        "Bootstrap-BU (not coherent)": 0.2192,
-        "ARIMA (not coherent)": 0.2566,
+        "Bootstrap-BU *": 0.2192,
+        "ARIMA *": 0.2566,
         "SHARQ": 0.2711,
-        "PROFHiT": 0.2201
+        "PROFHIT *": 0.2201
       },
       {
         "level": "3 (geo.)",
@@ -348,10 +348,10 @@
         "DPMN-GroupBU": 0.3311,
         "HierE2E": 0.2784,
         "PERMBU-MinT": 0.4049,
-        "Bootstrap-BU (not coherent)": 0.2923,
-        "ARIMA (not coherent)": 0.41,
+        "Bootstrap-BU *": 0.2923,
+        "ARIMA *": 0.41,
         "SHARQ": 0.3847,
-        "PROFHiT": 0.3648
+        "PROFHIT *": 0.3648
       },
       {
         "level": "4 (geo.)",
@@ -359,10 +359,10 @@
         "DPMN-GroupBU": 0.337,
         "HierE2E": 0.29,
         "PERMBU-MinT": 0.4236,
-        "Bootstrap-BU (not coherent)": 0.2999,
-        "ARIMA (not coherent)": 0.4182,
+        "Bootstrap-BU *": 0.2999,
+        "ARIMA *": 0.4182,
         "SHARQ": 0.3965,
-        "PROFHiT": 0.3684
+        "PROFHIT *": 0.3684
       },
       {
         "level": "5 (prp.)",
@@ -370,10 +370,10 @@
         "DPMN-GroupBU": 0.5098,
         "HierE2E": 0.4307,
         "PERMBU-MinT": 0.7177,
-        "Bootstrap-BU (not coherent)": 0.4339,
-        "ARIMA (not coherent)": 0.6708,
+        "Bootstrap-BU *": 0.4339,
+        "ARIMA *": 0.6708,
         "SHARQ": 0.5869,
-        "PROFHiT": 0.6368
+        "PROFHIT *": 0.6368
       }
     ],
     "Favorita": [
@@ -383,10 +383,10 @@
         "DPMN-GroupBU": 0.276,
         "HierE2E": 0.4714,
         "PERMBU-MinT": 0.2692,
-        "Bootstrap-BU (not coherent)": 0.29,
-        "ARIMA (not coherent)": 0.3112,
+        "Bootstrap-BU *": 0.29,
+        "ARIMA *": 0.3112,
         "SHARQ": null,
-        "PROFHiT": null
+        "PROFHIT *": null
       },
       {
         "level": "2 (geo.)",
@@ -394,10 +394,10 @@
         "DPMN-GroupBU": 0.3865,
         "HierE2E": 0.5182,
         "PERMBU-MinT": 0.3824,
-        "Bootstrap-BU (not coherent)": 0.3877,
-        "ARIMA (not coherent)": 0.4183,
+        "Bootstrap-BU *": 0.3877,
+        "ARIMA *": 0.4183,
         "SHARQ": null,
-        "PROFHiT": null
+        "PROFHIT *": null
       },
       {
         "level": "3 (geo.)",
@@ -405,10 +405,10 @@
         "DPMN-GroupBU": 0.4068,
         "HierE2E": 0.5291,
         "PERMBU-MinT": 0.6838,
-        "Bootstrap-BU (not coherent)": 0.449,
-        "ARIMA (not coherent)": 0.4446,
+        "Bootstrap-BU *": 0.449,
+        "ARIMA *": 0.4446,
         "SHARQ": null,
-        "PROFHiT": null
+        "PROFHIT *": null
       },
       {
         "level": "4 (geo.)",
@@ -416,10 +416,10 @@
         "DPMN-GroupBU": 0.5387,
         "HierE2E": 0.6012,
         "PERMBU-MinT": 0.5532,
-        "Bootstrap-BU (not coherent)": 0.5749,
-        "ARIMA (not coherent)": 0.5749,
+        "Bootstrap-BU *": 0.5749,
+        "ARIMA *": 0.5749,
         "SHARQ": null,
-        "PROFHiT": null
+        "PROFHIT *": null
       }
     ]
   }

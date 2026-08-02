@@ -79,10 +79,6 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
             </button>
           ))}
         </div>
-        <span className="section__note">
-          Column colour = model identity, matching the level charts · the tinted cell in each row
-          won that dataset · grey shading tracks how close the rest came
-        </span>
         <button
           className="iconbtn"
           onClick={() => setMaximized((v) => !v)}

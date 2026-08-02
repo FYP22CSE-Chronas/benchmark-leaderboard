@@ -78,9 +78,6 @@ export default function App() {
             </div>
             <div className="section__note">Lower is better · aggregated over all hierarchy levels</div>
           </div>
-          <p className="prose">
-            Mean scaled CRPS per dataset, aggregated across the full hierarchy.
-          </p>
           <BenchmarkTable data={data} rankMap={rankMap} styleMap={styleMap} />
         </section>
       )}
@@ -92,7 +89,7 @@ export default function App() {
               <Trophy size={14} strokeWidth={1.8} />
               Model leaderboard
             </div>
-            <div className="section__note">Mean sCRPS across datasets · lower is better</div>
+            <div className="section__note">Average positional rank · lower is better</div>
           </div>
           <Leaderboard entries={entries} styleMap={styleMap} />
         </section>
@@ -137,7 +134,7 @@ export default function App() {
 
       <footer className="footnotes">
         <div>
-          Models labelled <code>(not coherent)</code> do not guarantee that forecasts add up across
+          Models labelled <code>*</code> do not guarantee that forecasts add up across
           the hierarchy, so their scores are not directly comparable to the coherent methods.
         </div>
         <div>
