@@ -422,55 +422,5 @@
         "PROFHiT": null
       }
     ]
-  },
-  "leaderboard": [
-    {
-      "model": "CLOVER (crps)",
-      "avgSCRPS": 0.1243,
-      "datasetsCovered": 6,
-      "wins": 5
-    },
-    {
-      "model": "Bootstrap-BU (not coherent)",
-      "avgSCRPS": 0.1636,
-      "datasetsCovered": 6,
-      "wins": 0
-    },
-    {
-      "model": "SHARQ",
-      "avgSCRPS": 0.1652,
-      "datasetsCovered": 5,
-      "wins": 0
-    },
-    {
-      "model": "DPMN-GroupBU",
-      "avgSCRPS": 0.1696,
-      "datasetsCovered": 6,
-      "wins": 0
-    },
-    {
-      "model": "HierE2E",
-      "avgSCRPS": 0.1778,
-      "datasetsCovered": 6,
-      "wins": 0
-    },
-    {
-      "model": "ARIMA (not coherent)",
-      "avgSCRPS": 0.1879,
-      "datasetsCovered": 6,
-      "wins": 0
-    },
-    {
-      "model": "PERMBU-MinT",
-      "avgSCRPS": 0.2047,
-      "datasetsCovered": 5,
-      "wins": 1
-    },
-    {
-      "model": "PROFHiT",
-      "avgSCRPS": 0.23,
-      "datasetsCovered": 5,
-      "wins": 0
-    }
-  ]
+  }
 }

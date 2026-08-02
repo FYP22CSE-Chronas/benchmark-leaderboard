@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { ArrowDown, ArrowUp, ChevronsUpDown, Database } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { ArrowDown, ArrowUp, ChevronsUpDown, Database, Maximize2, Minimize2 } from 'lucide-react';
 import { bestInRow, worstInRow, intensity, isNumber } from '../lib/scoring.js';
 
 const MODES = [
@@ -12,6 +12,20 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
   const models = data.overallModels;
   const [mode, setMode] = useState('value');
   const [sort, setSort] = useState({ key: null, dir: 'asc' });
+  const [maximized, setMaximized] = useState(false);
+
+  // Escape leaves the maximized view, and the page behind it must not scroll.
+  useEffect(() => {
+    if (!maximized) return undefined;
+    const onKey = (e) => e.key === 'Escape' && setMaximized(false);
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [maximized]);
 
   const rows = useMemo(() => {
     const stats = data.overall.map((row) => ({
@@ -56,8 +70,8 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
   };
 
   return (
-    <>
-      <div className="toolbar" style={{ marginBottom: 16 }}>
+    <div className="tableview" data-max={maximized}>
+      <div className="toolbar tableview__bar">
         <div className="segmented">
           {MODES.map((m) => (
             <button key={m.key} data-active={mode === m.key} onClick={() => setMode(m.key)}>
@@ -69,6 +83,18 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
           Column colour = model identity, matching the level charts · the tinted cell in each row
           won that dataset · grey shading tracks how close the rest came
         </span>
+        <button
+          className="iconbtn"
+          onClick={() => setMaximized((v) => !v)}
+          title={maximized ? 'Exit full screen (Esc)' : 'Maximize table'}
+        >
+          {maximized ? (
+            <Minimize2 size={13} strokeWidth={1.8} />
+          ) : (
+            <Maximize2 size={13} strokeWidth={1.8} />
+          )}
+          {maximized ? 'Close' : 'Maximize'}
+        </button>
       </div>
 
       <div className="tablewrap">
@@ -137,7 +163,7 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
           </tbody>
           <tfoot>
             <tr>
-              <td className="lead" style={{ color: 'var(--ink-3)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              <td className="lead" style={{ color: 'var(--ink-3)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 Dataset wins
               </td>
               {models.map((model) => {
@@ -160,6 +186,6 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
           </tfoot>
         </table>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,64 +1,12 @@
 /**
- * Composite point system for the hierarchical time-series benchmark.
+ * Leaderboard scoring for the hierarchical time-series benchmark.
  *
- * The raw `avgSCRPS` shipped in benchmark.json is misleading: it averages only
- * over the datasets a model actually ran on, so a model that skips the hardest
- * dataset (e.g. Favorita) gets a flattering mean. The point system below fixes
- * that by scoring quality and breadth separately, then recombining them.
- *
- * Every model earns 0-100 points from four bounded sub-scores:
- *
- *   SKILL     35 pts  Ratio of the dataset-best sCRPS to the model's sCRPS,
- *                     averaged over the datasets it covers. 1.0 = best
- *                     everywhere. Scale-free, so Labour (~0.007) and Favorita
- *                     (~0.3) contribute equally instead of the harder dataset
- *                     dominating a raw mean.
- *   RANK      25 pts  Normalised placing (1st = 1, last = 0) averaged over the
- *                     datasets it covers. Rewards consistently beating peers
- *                     even where the margin in sCRPS is small.
- *   LEVELS    25 pts  Same ratio as SKILL but computed over every individual
- *                     hierarchy level, so a model that wins the aggregate while
- *                     being weak deep in the hierarchy is not over-rewarded.
- *   COVERAGE  15 pts  Fraction of the 6 datasets with a reported result.
- *                     Kept as its own term so "good but narrow" is visible
- *                     rather than silently folded into the quality scores.
- *
- * Lower sCRPS is better throughout; all sub-scores are higher-is-better.
+ * The ranking is deliberately simple: models are ordered by their mean sCRPS
+ * over the datasets in the overall table. Lower is better, ties broken by the
+ * number of datasets won. Nothing else feeds the ranking — no weights, no
+ * composite. Coverage and wins are reported alongside as context only, because
+ * a model that skipped a dataset is averaging over an easier set.
  */
-
-export const WEIGHTS = {
-  skill: 35,
-  rank: 25,
-  levels: 25,
-  coverage: 15,
-};
-
-export const WEIGHT_META = [
-  {
-    key: 'skill',
-    label: 'Skill',
-    weight: WEIGHTS.skill,
-    blurb: 'Best sCRPS on the dataset / this model’s sCRPS, averaged over covered datasets.',
-  },
-  {
-    key: 'rank',
-    label: 'Rank',
-    weight: WEIGHTS.rank,
-    blurb: 'Normalised placing per dataset (1st = 1, last = 0), averaged over covered datasets.',
-  },
-  {
-    key: 'levels',
-    label: 'Levels',
-    weight: WEIGHTS.levels,
-    blurb: 'Skill ratio recomputed on every individual hierarchy level, then averaged.',
-  },
-  {
-    key: 'coverage',
-    label: 'Coverage',
-    weight: WEIGHTS.coverage,
-    blurb: 'Share of the benchmark’s datasets the model reports a result for.',
-  },
-];
 
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
@@ -86,102 +34,56 @@ export function bestInRow(row, models) {
   return values.length ? Math.min(...values) : null;
 }
 
+export function worstInRow(row, models) {
+  const values = models.map((m) => row[m]).filter(isNum);
+  return values.length ? Math.max(...values) : null;
+}
+
 /**
- * Builds the ranked leaderboard plus the per-model sub-score breakdown.
- * @returns {Array<object>} sorted best-first, each entry carrying `points`,
- *   `parts` (raw 0-1 sub-scores), `contrib` (points contributed per part).
+ * Ranks models by mean sCRPS across the overall table.
+ * @returns {Array<object>} sorted best-first, each entry carrying `avgSCRPS`,
+ *   `covered`, `datasetCount`, `wins` and its 1-based `rank`.
  */
 export function computeLeaderboard(data) {
   const models = data.overallModels;
   const overall = data.overall;
   const datasetCount = overall.length;
 
-  // --- per-dataset best + ranks on the overall table -------------------------
-  const overallBest = new Map();
-  const overallRanks = new Map();
-  for (const row of overall) {
-    overallBest.set(row.dataset, bestInRow(row, models));
-    overallRanks.set(row.dataset, rankRow(row, models));
-  }
-
-  // --- per-level best across every dataset ----------------------------------
-  const levelRows = [];
-  for (const [dataset, rows] of Object.entries(data.byLevel)) {
-    for (const row of rows) {
-      levelRows.push({ dataset, row, best: bestInRow(row, data.levelModels) });
-    }
-  }
+  const bestPerDataset = new Map(
+    overall.map((row) => [row.dataset, bestInRow(row, models)]),
+  );
 
   const entries = models.map((model) => {
-    let skillSum = 0;
-    let rankSum = 0;
+    let sum = 0;
     let covered = 0;
     let wins = 0;
-    let podiums = 0;
-    let scrpsSum = 0;
 
     for (const row of overall) {
       const value = row[model];
       if (!isNum(value)) continue;
       covered += 1;
-      scrpsSum += value;
-
-      const best = overallBest.get(row.dataset);
-      skillSum += best / value;
-
-      const ranks = overallRanks.get(row.dataset);
-      const rank = ranks.get(model);
-      const n = ranks.size;
-      rankSum += n > 1 ? (n - rank) / (n - 1) : 1;
-      if (rank === 1) wins += 1;
-      if (rank <= 3) podiums += 1;
+      sum += value;
+      if (value === bestPerDataset.get(row.dataset)) wins += 1;
     }
-
-    let levelSum = 0;
-    let levelCount = 0;
-    let levelWins = 0;
-    for (const { row, best } of levelRows) {
-      const value = row[model];
-      if (!isNum(value) || best === null) continue;
-      levelSum += best / value;
-      levelCount += 1;
-      if (value === best) levelWins += 1;
-    }
-
-    const parts = {
-      skill: covered ? skillSum / covered : 0,
-      rank: covered ? rankSum / covered : 0,
-      levels: levelCount ? levelSum / levelCount : 0,
-      coverage: datasetCount ? covered / datasetCount : 0,
-    };
-
-    const contrib = {
-      skill: parts.skill * WEIGHTS.skill,
-      rank: parts.rank * WEIGHTS.rank,
-      levels: parts.levels * WEIGHTS.levels,
-      coverage: parts.coverage * WEIGHTS.coverage,
-    };
-
-    const points = contrib.skill + contrib.rank + contrib.levels + contrib.coverage;
 
     return {
       model,
-      points,
-      parts,
-      contrib,
+      avgSCRPS: covered ? sum / covered : null,
       covered,
       datasetCount,
       wins,
-      podiums,
-      levelWins,
-      levelCount,
-      avgSCRPS: covered ? scrpsSum / covered : null,
     };
   });
 
-  entries.sort((a, b) => b.points - a.points || a.avgSCRPS - b.avgSCRPS);
+  // Models with no result at all sink to the bottom rather than sorting on NaN.
+  entries.sort((a, b) => {
+    if (a.avgSCRPS === null) return 1;
+    if (b.avgSCRPS === null) return -1;
+    return a.avgSCRPS - b.avgSCRPS || b.wins - a.wins;
+  });
   entries.forEach((entry, i) => {
-    entry.rank = i > 0 && entry.points === entries[i - 1].points ? entries[i - 1].rank : i + 1;
+    entry.rank =
+      i > 0 && entry.avgSCRPS === entries[i - 1].avgSCRPS ? entries[i - 1].rank : i + 1;
   });
   return entries;
 }
@@ -201,11 +103,5 @@ export function intensity(value, best, worst) {
   return 1 - (value - best) / (worst - best);
 }
 
-export function worstInRow(row, models) {
-  const values = models.map((m) => row[m]).filter(isNum);
-  return values.length ? Math.max(...values) : null;
-}
-
 export const formatScore = (v) => (isNum(v) ? v.toFixed(4) : '—');
-export const formatPoints = (v) => v.toFixed(1);
 export const isNumber = isNum;

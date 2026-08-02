@@ -201,6 +201,60 @@ button {
 
 /* ---------------------------------------------------------------- table -- */
 
+.tableview__bar {
+  margin-bottom: 16px;
+}
+
+/* The maximize toggle sits at the far right of the table toolbar. */
+.tableview__bar .iconbtn {
+  margin-left: auto;
+}
+
+.iconbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: color 0.12s, background 0.12s;
+}
+
+.iconbtn:hover {
+  color: var(--bg);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Full-screen table: fixed overlay, the wrap takes whatever height is left. */
+.tableview[data-max='true'] {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding: 16px var(--gut) var(--gut);
+}
+
+.tableview[data-max='true'] .tablewrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.tableview[data-max='true'] table {
+  font-size: 15px;
+}
+
+.tableview[data-max='true'] th,
+.tableview[data-max='true'] td {
+  padding: 15px 22px;
+}
+
 .tablewrap {
   border: 1px solid var(--line-strong);
   overflow-x: auto;
@@ -210,11 +264,12 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
+  font-size: 14px;
 }
 
 th,
 td {
-  padding: 9px 12px;
+  padding: 13px 18px;
   text-align: right;
   white-space: nowrap;
   border-bottom: 1px solid var(--line);
@@ -238,7 +293,7 @@ thead th {
   border-bottom: 1px solid var(--line-strong);
   color: var(--ink-2);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   vertical-align: bottom;
@@ -350,7 +405,7 @@ tbody tr:hover td.lead {
 
 .lb__row {
   display: grid;
-  grid-template-columns: 54px minmax(190px, 1.5fr) 96px minmax(260px, 2.4fr) repeat(3, 92px);
+  grid-template-columns: 54px minmax(190px, 1.5fr) 112px minmax(240px, 2.2fr) repeat(2, 92px);
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
@@ -423,25 +478,8 @@ tbody tr:hover td.lead {
 
 .lb__seg {
   height: 100%;
-  border-right: 1px solid #000;
-  position: relative;
-}
-
-.lb__seg:last-child {
-  border-right: none;
-}
-
-.lb__seg[data-k='skill'] {
-  background: #ffffff;
-}
-.lb__seg[data-k='rank'] {
-  background: #a8a8a8;
-}
-.lb__seg[data-k='levels'] {
-  background: #666666;
-}
-.lb__seg[data-k='coverage'] {
-  background: #303030;
+  min-width: 2px;
+  opacity: 0.85;
 }
 
 .legendkeys {
@@ -471,50 +509,6 @@ tbody tr:hover td.lead {
   height: 9px;
   border: none;
   flex: none;
-}
-
-/* ------------------------------------------------------------- formula -- */
-
-.formula {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  border: 1px solid var(--line-strong);
-}
-
-.formula__cell {
-  padding: 16px;
-  border-right: 1px solid var(--line);
-}
-
-.formula__cell:last-child {
-  border-right: none;
-}
-
-.formula__w {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.formula__w b {
-  font-size: 22px;
-  letter-spacing: -0.03em;
-  font-weight: 600;
-}
-
-.formula__w span {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-
-.formula__cell p {
-  margin: 0;
-  color: var(--ink-3);
-  font-size: 11.5px;
-  line-height: 1.55;
 }
 
 /* --------------------------------------------------------------- charts -- */

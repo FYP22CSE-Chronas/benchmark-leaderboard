@@ -92,7 +92,7 @@ export default function App() {
               <Trophy size={14} strokeWidth={1.8} />
               Model leaderboard
             </div>
-            <div className="section__note">100-point composite · higher is better</div>
+            <div className="section__note">Mean sCRPS across datasets · lower is better</div>
           </div>
           <Leaderboard entries={entries} styleMap={styleMap} />
         </section>
