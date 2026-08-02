@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowDown, ArrowUp, ChevronsUpDown, Database, Maximize2, Minimize2 } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowDown, ArrowUp, ChevronsUpDown, Database, Maximize2, Minimize2, Download, Image } from 'lucide-react';
+import * as XLSX from 'xlsx';
+import html2canvas from 'html2canvas';
 import { bestInRow, worstInRow, intensity, isNumber } from '../lib/scoring.js';
 
 const MODES = [
@@ -13,6 +15,7 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
   const [mode, setMode] = useState('value');
   const [sort, setSort] = useState({ key: null, dir: 'asc' });
   const [maximized, setMaximized] = useState(false);
+  const tableRef = useRef(null);
 
   // Escape leaves the maximized view, and the page behind it must not scroll.
   useEffect(() => {
@@ -69,6 +72,108 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
     return value.toFixed(4);
   };
 
+  const downloadExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(
+      rows.map(({ row, best, worst }) => ({
+        Dataset: row.dataset,
+        ...Object.fromEntries(
+          models.map((model) => [
+            model,
+            isNumber(row[model]) ? row[model].toFixed(4) : '—',
+          ]),
+        ),
+      })),
+    );
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Benchmark');
+    XLSX.writeFile(wb, 'hts-benchmark.xlsx');
+  };
+
+  // `.tablewrap` is the scroll container, so html2canvas would otherwise capture
+  // only the part currently in view. Expand it to its full scroll size for the
+  // duration of the shot, then put every touched style back.
+  const downloadImage = async () => {
+    const wrap = tableRef.current;
+    if (!wrap) return;
+
+    const saved = {
+      overflow: wrap.style.overflow,
+      width: wrap.style.width,
+      maxWidth: wrap.style.maxWidth,
+      height: wrap.style.height,
+      maxHeight: wrap.style.maxHeight,
+      flex: wrap.style.flex,
+      scrollLeft: wrap.scrollLeft,
+      scrollTop: wrap.scrollTop,
+    };
+
+    wrap.scrollLeft = 0;
+    wrap.scrollTop = 0;
+    wrap.style.overflow = 'visible';
+    wrap.style.width = 'max-content';
+    wrap.style.maxWidth = 'none';
+    wrap.style.height = 'auto';
+    wrap.style.maxHeight = 'none';
+    wrap.style.flex = 'none';
+
+    try {
+      const canvas = await html2canvas(wrap, {
+        scale: 2,
+        backgroundColor: '#000000',
+        width: wrap.scrollWidth,
+        height: wrap.scrollHeight,
+        windowWidth: Math.max(document.documentElement.clientWidth, wrap.scrollWidth + 64),
+        onclone: (doc) => {
+          // Sticky header/first column would be painted at their scroll offset
+          // in the clone; pinning them back to the flow keeps the shot aligned.
+          doc.querySelectorAll('.tablewrap thead th, .tablewrap .lead').forEach((el) => {
+            el.style.position = 'static';
+          });
+
+          // html2canvas does not honour a <td> as the containing block for the
+          // absolutely positioned `.bar` overlay, so each one bleeds down the
+          // table and the stacked opacities blow out the lower rows. It also
+          // drops inset box-shadows (the winner stripe). Bake both into the
+          // cell's own background, which it renders exactly.
+          const live = [...document.querySelectorAll('.tablewrap td')];
+          [...doc.querySelectorAll('.tablewrap td')].forEach((td, i) => {
+            const bar = td.querySelector('.bar');
+            if (bar) {
+              const style = getComputedStyle(live[i]?.querySelector('.bar') ?? bar);
+              const rgb = (style.backgroundColor.match(/[\d.]+/g) ?? []).slice(0, 3);
+              if (rgb.length === 3) {
+                td.style.backgroundColor = `rgba(${rgb.join(', ')}, ${style.opacity})`;
+              }
+              bar.remove();
+            }
+
+            const shadow = td.style.boxShadow;
+            if (shadow && shadow.includes('inset')) {
+              const colour = /(#[0-9a-f]{3,8}|rgba?\([^)]+\))/i.exec(shadow)?.[1];
+              if (colour) {
+                td.style.boxShadow = 'none';
+                td.style.backgroundImage = `linear-gradient(to right, ${colour} 0 3px, transparent 3px)`;
+              }
+            }
+          });
+        },
+      });
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'hts-benchmark-table.png';
+      link.click();
+    } finally {
+      wrap.style.overflow = saved.overflow;
+      wrap.style.width = saved.width;
+      wrap.style.maxWidth = saved.maxWidth;
+      wrap.style.height = saved.height;
+      wrap.style.maxHeight = saved.maxHeight;
+      wrap.style.flex = saved.flex;
+      wrap.scrollLeft = saved.scrollLeft;
+      wrap.scrollTop = saved.scrollTop;
+    }
+  };
+
   return (
     <div className="tableview" data-max={maximized}>
       <div className="toolbar tableview__bar">
@@ -79,21 +184,36 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
             </button>
           ))}
         </div>
-        <button
-          className="iconbtn"
-          onClick={() => setMaximized((v) => !v)}
-          title={maximized ? 'Exit full screen (Esc)' : 'Maximize table'}
-        >
-          {maximized ? (
-            <Minimize2 size={13} strokeWidth={1.8} />
-          ) : (
-            <Maximize2 size={13} strokeWidth={1.8} />
-          )}
-          {maximized ? 'Close' : 'Maximize'}
-        </button>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px' }}>
+          <button
+            className="iconbtn"
+            onClick={downloadExcel}
+            title="Download as Excel"
+          >
+            <Download size={13} strokeWidth={1.8} />
+          </button>
+          <button
+            className="iconbtn"
+            onClick={downloadImage}
+            title="Download as image"
+          >
+            <Image size={13} strokeWidth={1.8} />
+          </button>
+          <button
+            className="iconbtn"
+            onClick={() => setMaximized((v) => !v)}
+            title={maximized ? 'Exit full screen (Esc)' : 'Maximize table'}
+          >
+            {maximized ? (
+              <Minimize2 size={13} strokeWidth={1.8} />
+            ) : (
+              <Maximize2 size={13} strokeWidth={1.8} />
+            )}
+          </button>
+        </div>
       </div>
 
-      <div className="tablewrap">
+      <div className="tablewrap" ref={tableRef}>
         <table>
           <thead>
             <tr>

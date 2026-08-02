@@ -202,25 +202,22 @@ button {
 /* ---------------------------------------------------------------- table -- */
 
 .tableview__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 16px;
-}
-
-/* The maximize toggle sits at the far right of the table toolbar. */
-.tableview__bar .iconbtn {
-  margin-left: auto;
 }
 
 .iconbtn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   color: var(--ink-2);
-  white-space: nowrap;
   transition: color 0.12s, background 0.12s;
+  flex-shrink: 0;
 }
 
 .iconbtn:hover {
