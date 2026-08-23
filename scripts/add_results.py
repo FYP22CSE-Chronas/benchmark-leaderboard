@@ -16,12 +16,16 @@ PURPOSE_LEVELS = {
     "Tourism-L": 4,
     "Wiki": 1,
     "Favorita": 0,
+    "Prison": 3,
+    "Police": {2, 6},
 }
 
 
 def level_labels(count, purpose):
-    geo = count - purpose
-    return [f"{i + 1} ({'geo.' if i < geo else 'prp.'})" for i in range(count)]
+    if purpose is None:
+        return [str(i + 1) for i in range(count)]
+    prp = set(range(count - purpose + 1, count + 1)) if isinstance(purpose, int) else set(purpose)
+    return [f"{i + 1} ({'prp.' if i + 1 in prp else 'geo.'})" for i in range(count)]
 
 
 def read_run(path):
@@ -51,16 +55,19 @@ def main():
     ap.add_argument("run", help="path to the run's level,scrps CSV (a 'mean' column is accepted too)")
     ap.add_argument("--target", default=DEFAULT_TARGET, help="results CSV to update (default: experiments.csv)")
     ap.add_argument("--purpose-levels", type=int, default=None,
-                    help="how many trailing levels are purpose-based (default: known per dataset, else 0)")
+                    help="how many trailing levels are purpose-based; labels them N (geo.) / N (prp.) "
+                         "(default: known per dataset, otherwise levels are numbered 1..N with no suffix)")
     ap.add_argument("--decimals", type=int, default=4, help="decimal places for stored values (default: 4)")
     args = ap.parse_args()
 
     overall, levels, value_col = read_run(args.run)
     purpose = args.purpose_levels
     if purpose is None:
-        purpose = PURPOSE_LEVELS.get(args.dataset, 0)
-    if purpose > len(levels):
+        purpose = PURPOSE_LEVELS.get(args.dataset)
+    if isinstance(purpose, int) and purpose > len(levels):
         sys.exit(f"--purpose-levels {purpose} exceeds the {len(levels)} levels in {args.run}")
+    if isinstance(purpose, set) and max(purpose) > len(levels):
+        sys.exit(f"PURPOSE_LEVELS[{args.dataset!r}] names level {max(purpose)}, but {args.run} has {len(levels)}")
 
     def num(row):
         raw = (row.get(value_col) or "").strip()
