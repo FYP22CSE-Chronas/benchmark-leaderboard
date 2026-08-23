@@ -1,11 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BarChart3, LineChart, Table2, Terminal, Trophy } from 'lucide-react';
-import data from './data/benchmark.json';
+import benchmarkCsv from './data/benchmark.csv?raw';
+import experimentsCsv from './data/experiments.csv?raw';
+import { buildDataset } from './lib/results.js';
 import { computeLeaderboard, overallRankMap } from './lib/scoring.js';
 import { buildStyleMap } from './lib/modelStyles.js';
 import BenchmarkTable from './components/BenchmarkTable.jsx';
 import Leaderboard from './components/Leaderboard.jsx';
 import LevelChart from './components/LevelChart.jsx';
+import SourceToggle from './components/SourceToggle.jsx';
 import UnitToggle from './components/UnitToggle.jsx';
 import { MILLI, useUnit } from './lib/units.jsx';
 
@@ -15,18 +18,45 @@ const TABS = [
   { key: 'levels', label: 'By level', Icon: LineChart },
 ];
 
+const SOURCE_KEY = 'hts.data.source';
+
+const SOURCES = {
+  benchmark: buildDataset(benchmarkCsv, {
+    metric: 'sCRPS',
+    description:
+      'Mean scaled CRPS (sCRPS), averaged over 5 runs, with 95% confidence intervals. Lower is better.',
+  }),
+  experiments: buildDataset(experimentsCsv, {
+    metric: 'sCRPS',
+    description: 'Mean scaled CRPS (sCRPS), averaged over 5 runs. Lower is better.',
+  }),
+};
+
 export default function App() {
   const [tab, setTab] = useState('benchmark');
+  const [source, setSource] = useState(() => {
+    try {
+      return localStorage.getItem(SOURCE_KEY) === 'experiments' ? 'experiments' : 'benchmark';
+    } catch {
+      return 'benchmark';
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(SOURCE_KEY, source);
+    } catch {}
+  }, [source]);
+
+  const data = SOURCES[source];
   const unit = useUnit();
   const [scale, setScale] = useState('linear');
 
-  const entries = useMemo(() => computeLeaderboard(data), []);
-  const rankMap = useMemo(() => overallRankMap(data), []);
-  // One identity map for the whole app, so a model wears the same hue in the
-  // table, the leaderboard, and every chart. Order comes from the overall table.
+  const entries = useMemo(() => computeLeaderboard(data), [data]);
+  const rankMap = useMemo(() => overallRankMap(data), [data]);
   const styleMap = useMemo(
     () => buildStyleMap([...new Set([...data.overallModels, ...data.levelModels])]),
-    [],
+    [data],
   );
 
   const leader = entries[0];
@@ -72,6 +102,7 @@ export default function App() {
             </button>
           ))}
         </nav>
+        <SourceToggle source={source} setSource={setSource} />
         <UnitToggle />
       </div>
 

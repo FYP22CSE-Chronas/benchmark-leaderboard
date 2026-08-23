@@ -48,8 +48,6 @@ button {
   color: var(--bg);
 }
 
-/* ---------------------------------------------------------------- layout -- */
-
 .shell {
   max-width: 1280px;
   margin: 0 auto;
@@ -123,8 +121,6 @@ button {
   letter-spacing: -0.02em;
 }
 
-/* ------------------------------------------------------------------ nav -- */
-
 .navrow {
   display: flex;
   align-items: center;
@@ -174,16 +170,23 @@ button {
   color: var(--bg);
 }
 
-/* ------------------------------------------------------------ unit switch -- */
-
 .unitswitch {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.navrow .unitswitch {
+.sourceswitch {
+  display: flex;
+  align-items: center;
+}
+
+.navrow .sourceswitch {
   margin-left: auto;
+}
+
+.navrow .unitswitch {
+  margin-left: 0;
 }
 
 .unitswitch__cap {
@@ -194,8 +197,6 @@ button {
   white-space: nowrap;
 }
 
-/* The options are written as sample values, so they must not be uppercased
-   or letter-spaced like the other segmented labels. */
 .unitswitch .segmented button {
   text-transform: none;
   letter-spacing: 0.02em;
@@ -204,8 +205,6 @@ button {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-
-/* --------------------------------------------------------------- section -- */
 
 .section {
   margin-bottom: 52px;
@@ -242,8 +241,6 @@ button {
   margin: 0 0 20px;
 }
 
-/* ---------------------------------------------------------------- table -- */
-
 .tableview__bar {
   display: flex;
   align-items: center;
@@ -269,7 +266,6 @@ button {
   border-color: var(--ink);
 }
 
-/* Full-screen table: fixed overlay, the wrap takes whatever height is left. */
 .tableview[data-max='true'] {
   position: fixed;
   inset: 0;
@@ -435,8 +431,6 @@ tbody tr:hover td.lead {
   text-transform: uppercase;
 }
 
-/* ----------------------------------------------------------- leaderboard -- */
-
 .lb {
   display: grid;
   gap: 0;
@@ -543,15 +537,12 @@ tbody tr:hover td.lead {
   border: 1px solid var(--line-strong);
 }
 
-/* Series identity chip — same hue the model wears in the level charts. */
 .swatch--series {
   width: 9px;
   height: 9px;
   border: none;
   flex: none;
 }
-
-/* --------------------------------------------------------------- charts -- */
 
 .chartgrid {
   display: grid;
@@ -716,8 +707,6 @@ tbody tr:hover td.lead {
 .tooltip__val {
   font-variant-numeric: tabular-nums;
 }
-
-/* -------------------------------------------------------------- controls -- */
 
 .toolbar {
   display: flex;

@@ -1,0 +1,262 @@
+model,dataset,level,scrps
+CLOVER (crps),Labour,Overall,0.0074
+CLOVER (crps),Traffic,Overall,0.0171
+CLOVER (crps),Tourism-S,Overall,0.0631
+CLOVER (crps),Tourism-L,Overall,0.1197
+CLOVER (crps),Wiki,Overall,0.2475
+CLOVER (crps),Favorita,Overall,0.2908
+CLOVER (crps),Labour,1 (geo.),0.0032
+CLOVER (crps),Labour,2 (geo.),0.0054
+CLOVER (crps),Labour,3 (geo.),0.0075
+CLOVER (crps),Labour,4 (geo.),0.0137
+CLOVER (crps),Traffic,1 (geo.),0.0026
+CLOVER (crps),Traffic,2 (geo.),0.0029
+CLOVER (crps),Traffic,3 (geo.),0.0044
+CLOVER (crps),Traffic,4 (geo.),0.0587
+CLOVER (crps),Tourism-S,1 (geo.),0.0268
+CLOVER (crps),Tourism-S,2 (geo.),0.0484
+CLOVER (crps),Tourism-S,3 (geo.),0.0784
+CLOVER (crps),Tourism-S,4 (geo.),0.0989
+CLOVER (crps),Tourism-L,1 (geo.),0.0292
+CLOVER (crps),Tourism-L,2 (geo.),0.0593
+CLOVER (crps),Tourism-L,3 (geo.),0.1044
+CLOVER (crps),Tourism-L,4 (geo.),0.1540
+CLOVER (crps),Tourism-L,5 (prp.),0.0594
+CLOVER (crps),Tourism-L,6 (prp.),0.1100
+CLOVER (crps),Tourism-L,7 (prp.),0.1824
+CLOVER (crps),Tourism-L,8 (prp.),0.2591
+CLOVER (crps),Wiki,1 (geo.),0.0823
+CLOVER (crps),Wiki,2 (geo.),0.1765
+CLOVER (crps),Wiki,3 (geo.),0.2743
+CLOVER (crps),Wiki,4 (geo.),0.2814
+CLOVER (crps),Wiki,5 (prp.),0.4231
+CLOVER (crps),Favorita,1 (geo.),0.1841
+CLOVER (crps),Favorita,2 (geo.),0.2754
+CLOVER (crps),Favorita,3 (geo.),0.2945
+CLOVER (crps),Favorita,4 (geo.),0.4092
+DPMN-GroupBU,Labour,Overall,0.0102
+DPMN-GroupBU,Traffic,Overall,0.0907
+DPMN-GroupBU,Tourism-S,Overall,0.0740
+DPMN-GroupBU,Tourism-L,Overall,0.1249
+DPMN-GroupBU,Wiki,Overall,0.3158
+DPMN-GroupBU,Favorita,Overall,0.4020
+DPMN-GroupBU,Labour,1 (geo.),0.0033
+DPMN-GroupBU,Labour,2 (geo.),0.0088
+DPMN-GroupBU,Labour,3 (geo.),0.0115
+DPMN-GroupBU,Labour,4 (geo.),0.0173
+DPMN-GroupBU,Traffic,1 (geo.),0.0397
+DPMN-GroupBU,Traffic,2 (geo.),0.0537
+DPMN-GroupBU,Traffic,3 (geo.),0.0538
+DPMN-GroupBU,Traffic,4 (geo.),0.2155
+DPMN-GroupBU,Tourism-S,1 (geo.),0.0329
+DPMN-GroupBU,Tourism-S,2 (geo.),0.0502
+DPMN-GroupBU,Tourism-S,3 (geo.),0.0914
+DPMN-GroupBU,Tourism-S,4 (geo.),0.1212
+DPMN-GroupBU,Tourism-L,1 (geo.),0.0431
+DPMN-GroupBU,Tourism-L,2 (geo.),0.0637
+DPMN-GroupBU,Tourism-L,3 (geo.),0.1084
+DPMN-GroupBU,Tourism-L,4 (geo.),0.1554
+DPMN-GroupBU,Tourism-L,5 (prp.),0.0700
+DPMN-GroupBU,Tourism-L,6 (prp.),0.1070
+DPMN-GroupBU,Tourism-L,7 (prp.),0.1887
+DPMN-GroupBU,Tourism-L,8 (prp.),0.2629
+DPMN-GroupBU,Wiki,1 (geo.),0.1709
+DPMN-GroupBU,Wiki,2 (geo.),0.2299
+DPMN-GroupBU,Wiki,3 (geo.),0.3311
+DPMN-GroupBU,Wiki,4 (geo.),0.3370
+DPMN-GroupBU,Wiki,5 (prp.),0.5098
+DPMN-GroupBU,Favorita,1 (geo.),0.2760
+DPMN-GroupBU,Favorita,2 (geo.),0.3865
+DPMN-GroupBU,Favorita,3 (geo.),0.4068
+DPMN-GroupBU,Favorita,4 (geo.),0.5387
+HierE2E,Labour,Overall,0.0171
+HierE2E,Traffic,Overall,0.0375
+HierE2E,Tourism-S,Overall,0.0761
+HierE2E,Tourism-L,Overall,0.1472
+HierE2E,Wiki,Overall,0.2592
+HierE2E,Favorita,Overall,0.5298
+HierE2E,Labour,1 (geo.),0.0052
+HierE2E,Labour,2 (geo.),0.0181
+HierE2E,Labour,3 (geo.),0.0188
+HierE2E,Labour,4 (geo.),0.0262
+HierE2E,Traffic,1 (geo.),0.0183
+HierE2E,Traffic,2 (geo.),0.0183
+HierE2E,Traffic,3 (geo.),0.0209
+HierE2E,Traffic,4 (geo.),0.0974
+HierE2E,Tourism-S,1 (geo.),0.0400
+HierE2E,Tourism-S,2 (geo.),0.0609
+HierE2E,Tourism-S,3 (geo.),0.0914
+HierE2E,Tourism-S,4 (geo.),0.1122
+HierE2E,Tourism-L,1 (geo.),0.0842
+HierE2E,Tourism-L,2 (geo.),0.1012
+HierE2E,Tourism-L,3 (geo.),0.1317
+HierE2E,Tourism-L,4 (geo.),0.1705
+HierE2E,Tourism-L,5 (prp.),0.0995
+HierE2E,Tourism-L,6 (prp.),0.1336
+HierE2E,Tourism-L,7 (prp.),0.1955
+HierE2E,Tourism-L,8 (prp.),0.2615
+HierE2E,Wiki,1 (geo.),0.1007
+HierE2E,Wiki,2 (geo.),0.1963
+HierE2E,Wiki,3 (geo.),0.2784
+HierE2E,Wiki,4 (geo.),0.2900
+HierE2E,Wiki,5 (prp.),0.4307
+HierE2E,Favorita,1 (geo.),0.4714
+HierE2E,Favorita,2 (geo.),0.5182
+HierE2E,Favorita,3 (geo.),0.5291
+HierE2E,Favorita,4 (geo.),0.6012
+PERMBU-MinT,Labour,Overall,0.0067
+PERMBU-MinT,Traffic,Overall,0.0677
+PERMBU-MinT,Tourism-S,Overall,0.0812
+PERMBU-MinT,Wiki,Overall,0.4008
+PERMBU-MinT,Favorita,Overall,0.4670
+PERMBU-MinT,Labour,1 (geo.),0.0013
+PERMBU-MinT,Labour,2 (geo.),0.0045
+PERMBU-MinT,Labour,3 (geo.),0.0076
+PERMBU-MinT,Labour,4 (geo.),0.0133
+PERMBU-MinT,Traffic,1 (geo.),0.0331
+PERMBU-MinT,Traffic,2 (geo.),0.0341
+PERMBU-MinT,Traffic,3 (geo.),0.0417
+PERMBU-MinT,Traffic,4 (geo.),0.1621
+PERMBU-MinT,Tourism-S,1 (geo.),0.0375
+PERMBU-MinT,Tourism-S,2 (geo.),0.0679
+PERMBU-MinT,Tourism-S,3 (geo.),0.0959
+PERMBU-MinT,Tourism-S,4 (geo.),0.1234
+PERMBU-MinT,Wiki,1 (geo.),0.1886
+PERMBU-MinT,Wiki,2 (geo.),0.2691
+PERMBU-MinT,Wiki,3 (geo.),0.4049
+PERMBU-MinT,Wiki,4 (geo.),0.4236
+PERMBU-MinT,Wiki,5 (prp.),0.7177
+PERMBU-MinT,Favorita,1 (geo.),0.2692
+PERMBU-MinT,Favorita,2 (geo.),0.3824
+PERMBU-MinT,Favorita,3 (geo.),0.6838
+PERMBU-MinT,Favorita,4 (geo.),0.5532
+SHARQ,Labour,Overall,0.0494
+SHARQ,Traffic,Overall,0.1001
+SHARQ,Tourism-S,Overall,0.1086
+SHARQ,Tourism-L,Overall,0.2071
+SHARQ,Wiki,Overall,0.3607
+SHARQ,Labour,1 (geo.),0.0481
+SHARQ,Labour,2 (geo.),0.0490
+SHARQ,Labour,3 (geo.),0.0490
+SHARQ,Labour,4 (geo.),0.0515
+SHARQ,Traffic,1 (geo.),0.0534
+SHARQ,Traffic,2 (geo.),0.0616
+SHARQ,Traffic,3 (geo.),0.0801
+SHARQ,Traffic,4 (geo.),0.2052
+SHARQ,Tourism-S,1 (geo.),0.0428
+SHARQ,Tourism-S,2 (geo.),0.0855
+SHARQ,Tourism-S,3 (geo.),0.1367
+SHARQ,Tourism-S,4 (geo.),0.1696
+SHARQ,Tourism-L,1 (geo.),0.0791
+SHARQ,Tourism-L,2 (geo.),0.1053
+SHARQ,Tourism-L,3 (geo.),0.1864
+SHARQ,Tourism-L,4 (geo.),0.2580
+SHARQ,Tourism-L,5 (prp.),0.1105
+SHARQ,Tourism-L,6 (prp.),0.1880
+SHARQ,Tourism-L,7 (prp.),0.3091
+SHARQ,Tourism-L,8 (prp.),0.4208
+SHARQ,Wiki,1 (geo.),0.1645
+SHARQ,Wiki,2 (geo.),0.2711
+SHARQ,Wiki,3 (geo.),0.3847
+SHARQ,Wiki,4 (geo.),0.3965
+SHARQ,Wiki,5 (prp.),0.5869
+PROFHIT *,Labour,Overall,0.2018
+PROFHIT *,Traffic,Overall,0.1104
+PROFHIT *,Tourism-S,Overall,0.0991
+PROFHIT *,Tourism-L,Overall,0.3989
+PROFHIT *,Wiki,Overall,0.3398
+PROFHIT *,Labour,1 (geo.),0.2064
+PROFHIT *,Labour,2 (geo.),0.2014
+PROFHIT *,Labour,3 (geo.),0.1988
+PROFHIT *,Labour,4 (geo.),0.2006
+PROFHIT *,Traffic,1 (geo.),0.0752
+PROFHIT *,Traffic,2 (geo.),0.0897
+PROFHIT *,Traffic,3 (geo.),0.0835
+PROFHIT *,Traffic,4 (geo.),0.1932
+PROFHIT *,Tourism-S,1 (geo.),0.0571
+PROFHIT *,Tourism-S,2 (geo.),0.0846
+PROFHIT *,Tourism-S,3 (geo.),0.1157
+PROFHIT *,Tourism-S,4 (geo.),0.1389
+PROFHIT *,Tourism-L,1 (geo.),0.1299
+PROFHIT *,Tourism-L,2 (geo.),0.1590
+PROFHIT *,Tourism-L,3 (geo.),0.1924
+PROFHIT *,Tourism-L,4 (geo.),0.4196
+PROFHIT *,Tourism-L,5 (prp.),0.1299
+PROFHIT *,Tourism-L,6 (prp.),0.1403
+PROFHIT *,Tourism-L,7 (prp.),0.1981
+PROFHIT *,Tourism-L,8 (prp.),0.7694
+PROFHIT *,Wiki,1 (geo.),0.1088
+PROFHIT *,Wiki,2 (geo.),0.2201
+PROFHIT *,Wiki,3 (geo.),0.3648
+PROFHIT *,Wiki,4 (geo.),0.3684
+PROFHIT *,Wiki,5 (prp.),0.6368
+Bootstrap-BU *,Labour,Overall,0.0076
+Bootstrap-BU *,Traffic,Overall,0.0736
+Bootstrap-BU *,Tourism-S,Overall,0.0703
+Bootstrap-BU *,Tourism-L,Overall,0.1375
+Bootstrap-BU *,Wiki,Overall,0.2816
+Bootstrap-BU *,Favorita,Overall,0.4110
+Bootstrap-BU *,Labour,1 (geo.),0.0017
+Bootstrap-BU *,Labour,2 (geo.),0.0053
+Bootstrap-BU *,Labour,3 (geo.),0.0086
+Bootstrap-BU *,Labour,4 (geo.),0.0148
+Bootstrap-BU *,Traffic,1 (geo.),0.0468
+Bootstrap-BU *,Traffic,2 (geo.),0.0483
+Bootstrap-BU *,Traffic,3 (geo.),0.0530
+Bootstrap-BU *,Traffic,4 (geo.),0.1463
+Bootstrap-BU *,Tourism-S,1 (geo.),0.0335
+Bootstrap-BU *,Tourism-S,2 (geo.),0.0507
+Bootstrap-BU *,Tourism-S,3 (geo.),0.0845
+Bootstrap-BU *,Tourism-S,4 (geo.),0.1124
+Bootstrap-BU *,Tourism-L,1 (geo.),0.0622
+Bootstrap-BU *,Tourism-L,2 (geo.),0.0820
+Bootstrap-BU *,Tourism-L,3 (geo.),0.1207
+Bootstrap-BU *,Tourism-L,4 (geo.),0.1646
+Bootstrap-BU *,Tourism-L,5 (prp.),0.0788
+Bootstrap-BU *,Tourism-L,6 (prp.),0.1268
+Bootstrap-BU *,Tourism-L,7 (prp.),0.1949
+Bootstrap-BU *,Tourism-L,8 (prp.),0.2698
+Bootstrap-BU *,Wiki,1 (geo.),0.1630
+Bootstrap-BU *,Wiki,2 (geo.),0.2192
+Bootstrap-BU *,Wiki,3 (geo.),0.2923
+Bootstrap-BU *,Wiki,4 (geo.),0.2999
+Bootstrap-BU *,Wiki,5 (prp.),0.4339
+Bootstrap-BU *,Favorita,1 (geo.),0.2900
+Bootstrap-BU *,Favorita,2 (geo.),0.3877
+Bootstrap-BU *,Favorita,3 (geo.),0.4490
+Bootstrap-BU *,Favorita,4 (geo.),0.5749
+ARIMA *,Labour,Overall,0.0070
+ARIMA *,Traffic,Overall,0.0751
+ARIMA *,Tourism-S,Overall,0.0759
+ARIMA *,Tourism-L,Overall,0.1416
+ARIMA *,Wiki,Overall,0.3907
+ARIMA *,Favorita,Overall,0.4373
+ARIMA *,Labour,1 (geo.),0.0017
+ARIMA *,Labour,2 (geo.),0.0044
+ARIMA *,Labour,3 (geo.),0.0076
+ARIMA *,Labour,4 (geo.),0.0138
+ARIMA *,Traffic,1 (geo.),0.0376
+ARIMA *,Traffic,2 (geo.),0.0412
+ARIMA *,Traffic,3 (geo.),0.0549
+ARIMA *,Traffic,4 (geo.),0.1665
+ARIMA *,Tourism-S,1 (geo.),0.0354
+ARIMA *,Tourism-S,2 (geo.),0.0709
+ARIMA *,Tourism-S,3 (geo.),0.0848
+ARIMA *,Tourism-S,4 (geo.),0.1125
+ARIMA *,Tourism-L,1 (geo.),0.0263
+ARIMA *,Tourism-L,2 (geo.),0.0904
+ARIMA *,Tourism-L,3 (geo.),0.1389
+ARIMA *,Tourism-L,4 (geo.),0.1878
+ARIMA *,Tourism-L,5 (prp.),0.0770
+ARIMA *,Tourism-L,6 (prp.),0.1270
+ARIMA *,Tourism-L,7 (prp.),0.2022
+ARIMA *,Tourism-L,8 (prp.),0.2834
+ARIMA *,Wiki,1 (geo.),0.1981
+ARIMA *,Wiki,2 (geo.),0.2566
+ARIMA *,Wiki,3 (geo.),0.4100
+ARIMA *,Wiki,4 (geo.),0.4182
+ARIMA *,Wiki,5 (prp.),0.6708
+ARIMA *,Favorita,1 (geo.),0.3112
+ARIMA *,Favorita,2 (geo.),0.4183
+ARIMA *,Favorita,3 (geo.),0.4446
+ARIMA *,Favorita,4 (geo.),0.5749

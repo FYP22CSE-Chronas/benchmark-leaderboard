@@ -11,7 +11,6 @@ const PAD = { top: 16, right: 16, bottom: 46, left: 58 };
 const PLOT_W = W - PAD.left - PAD.right;
 const PLOT_H = H - PAD.top - PAD.bottom;
 
-/** Human-friendly tick steps: 1, 2, 2.5, 5 x 10^n. */
 function linearTicks(min, max, target = 5) {
   if (!(max > min)) return [min];
   const raw = (max - min) / target;
@@ -42,7 +41,6 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
   const [hidden, setHidden] = useState(() => new Set());
   const [hover, setHover] = useState(null);
 
-  // Models with at least one reported value on this dataset.
   const present = useMemo(
     () => models.filter((m) => rows.some((r) => isNumber(r[m]))),
     [models, rows],
@@ -56,7 +54,6 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
     let lo = values.length ? Math.min(...values) : 0;
     let hi = values.length ? Math.max(...values) : 1;
     if (lo === hi) {
-      // Single distinct value (or every series hidden): open a usable window.
       const span = Math.abs(lo) * 0.1 || 1;
       lo -= span;
       hi += span;
@@ -134,7 +131,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
           onMouseMove={handleMove}
           onMouseLeave={() => setHover(null)}
         >
-          {/* y grid + labels */}
+          {}
           {ticks.map((t) => {
             const y = yOf(t);
             if (!Number.isFinite(y) || y < PAD.top - 1 || y > PAD.top + PLOT_H + 1) return null;
@@ -148,7 +145,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
             );
           })}
 
-          {/* axes */}
+          {}
           <line className="axis-line" x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={PAD.top + PLOT_H} />
           <line
             className="axis-line"
@@ -158,7 +155,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
             y2={PAD.top + PLOT_H}
           />
 
-          {/* x labels */}
+          {}
           {rows.map((r, i) => (
             <text key={r.level} x={xOf(i)} y={PAD.top + PLOT_H + 17} textAnchor="middle">
               {r.level}
@@ -181,7 +178,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
             {unit.label}{domain.log ? ' · log' : ''}
           </text>
 
-          {/* hover crosshair */}
+          {}
           {hover && (
             <line
               className="cursor-line"
@@ -192,7 +189,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
             />
           )}
 
-          {/* series */}
+          {}
           {visible.map((model) => {
             const style = styleMap.get(model);
             let d = '';
@@ -230,7 +227,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
                   const d0 = markerPath(style.marker, xOf(i), yOf(v), r0);
                   return (
                     <g key={r.level}>
-                      {/* Surface ring: keeps overlapping markers legible where lines cross. */}
+                      {}
                       <path
                         d={d0}
                         fill={stroked ? 'none' : CHART_SURFACE}

@@ -20,7 +20,6 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
   const [maximized, setMaximized] = useState(false);
   const tableRef = useRef(null);
 
-  // Escape leaves the maximized view, and the page behind it must not scroll.
   useEffect(() => {
     if (!maximized) return undefined;
     const onKey = (e) => e.key === 'Escape' && setMaximized(false);
@@ -92,9 +91,6 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
     XLSX.writeFile(wb, unit.scaled ? 'hts-benchmark-x1e-3.xlsx' : 'hts-benchmark.xlsx');
   };
 
-  // `.tablewrap` is the scroll container, so html2canvas would otherwise capture
-  // only the part currently in view. Expand it to its full scroll size for the
-  // duration of the shot, then put every touched style back.
   const downloadImage = async () => {
     const wrap = tableRef.current;
     if (!wrap) return;
@@ -127,17 +123,10 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
         height: wrap.scrollHeight,
         windowWidth: Math.max(document.documentElement.clientWidth, wrap.scrollWidth + 64),
         onclone: (doc) => {
-          // Sticky header/first column would be painted at their scroll offset
-          // in the clone; pinning them back to the flow keeps the shot aligned.
           doc.querySelectorAll('.tablewrap thead th, .tablewrap .lead').forEach((el) => {
             el.style.position = 'static';
           });
 
-          // html2canvas does not honour a <td> as the containing block for the
-          // absolutely positioned `.bar` overlay, so each one bleeds down the
-          // table and the stacked opacities blow out the lower rows. It also
-          // drops inset box-shadows (the winner stripe). Bake both into the
-          // cell's own background, which it renders exactly.
           const live = [...document.querySelectorAll('.tablewrap td')];
           [...doc.querySelectorAll('.tablewrap td')].forEach((td, i) => {
             const bar = td.querySelector('.bar');

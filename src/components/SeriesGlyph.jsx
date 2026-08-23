@@ -1,6 +1,5 @@
 import { markerPath, isStrokeMarker } from '../lib/modelStyles.js';
 
-/** Miniature line-plus-marker preview used in legends and tooltips. */
 export default function SeriesGlyph({ style, width = 24, muted = false }) {
   const h = 12;
   const cy = h / 2;

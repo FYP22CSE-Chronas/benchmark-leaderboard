@@ -1,0 +1,36 @@
+model,dataset,level,scrps
+CLOVER - baseline,Labour,Overall,0.0081
+CLOVER - baseline,Labour,1 (geo.),0.0045
+CLOVER - baseline,Labour,2 (geo.),0.0062
+CLOVER - baseline,Labour,3 (geo.),0.0082
+CLOVER - baseline,Labour,4 (geo.),0.0136
+CLOVER - baseline,Traffic,Overall,0.0203
+CLOVER - baseline,Traffic,1 (geo.),0.0081
+CLOVER - baseline,Traffic,2 (geo.),0.0095
+CLOVER - baseline,Traffic,3 (geo.),0.0127
+CLOVER - baseline,Traffic,4 (geo.),0.0509
+CLOVER - baseline,Tourism-S,Overall,0.0680
+CLOVER - baseline,Tourism-S,1 (geo.),0.0277
+CLOVER - baseline,Tourism-S,2 (geo.),0.0506
+CLOVER - baseline,Tourism-S,3 (geo.),0.0843
+CLOVER - baseline,Tourism-S,4 (geo.),0.1095
+CLOVER - baseline,Tourism-L,Overall,0.1286
+CLOVER - baseline,Tourism-L,1 (geo.),0.0533
+CLOVER - baseline,Tourism-L,2 (geo.),0.0740
+CLOVER - baseline,Tourism-L,3 (geo.),0.1147
+CLOVER - baseline,Tourism-L,4 (geo.),0.1565
+CLOVER - baseline,Tourism-L,5 (prp.),0.0751
+CLOVER - baseline,Tourism-L,6 (prp.),0.1144
+CLOVER - baseline,Tourism-L,7 (prp.),0.1857
+CLOVER - baseline,Tourism-L,8 (prp.),0.2554
+CLOVER - baseline,Wiki,Overall,0.2505
+CLOVER - baseline,Wiki,1 (geo.),0.1053
+CLOVER - baseline,Wiki,2 (geo.),0.1905
+CLOVER - baseline,Wiki,3 (geo.),0.2683
+CLOVER - baseline,Wiki,4 (geo.),0.2746
+CLOVER - baseline,Wiki,5 (prp.),0.4139
+CLOVER - baseline,Favorita,Overall,0.2987
+CLOVER - baseline,Favorita,1 (geo.),0.1964
+CLOVER - baseline,Favorita,2 (geo.),0.2807
+CLOVER - baseline,Favorita,3 (geo.),0.3002
+CLOVER - baseline,Favorita,4 (geo.),0.4174
