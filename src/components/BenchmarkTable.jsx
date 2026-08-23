@@ -3,15 +3,18 @@ import { ArrowDown, ArrowUp, ChevronsUpDown, Database, Maximize2, Minimize2, Dow
 import * as XLSX from 'xlsx';
 import html2canvas from 'html2canvas';
 import { bestInRow, worstInRow, intensity, isNumber } from '../lib/scoring.js';
+import { useUnit } from '../lib/units.jsx';
+import UnitToggle from './UnitToggle.jsx';
 
 const MODES = [
-  { key: 'value', label: 'sCRPS' },
+  { key: 'value', label: null },
   { key: 'rank', label: 'Rank' },
   { key: 'delta', label: 'Δ vs best' },
 ];
 
 export default function BenchmarkTable({ data, rankMap, styleMap }) {
   const models = data.overallModels;
+  const unit = useUnit();
   const [mode, setMode] = useState('value');
   const [sort, setSort] = useState({ key: null, dir: 'asc' });
   const [maximized, setMaximized] = useState(false);
@@ -69,7 +72,7 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
       const pct = ((value - best) / best) * 100;
       return pct < 0.05 ? 'best' : `+${pct.toFixed(0)}%`;
     }
-    return value.toFixed(4);
+    return unit.format(value);
   };
 
   const downloadExcel = () => {
@@ -79,14 +82,14 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
         ...Object.fromEntries(
           models.map((model) => [
             model,
-            isNumber(row[model]) ? row[model].toFixed(4) : '—',
+            isNumber(row[model]) ? unit.format(row[model]) : '—',
           ]),
         ),
       })),
     );
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Benchmark');
-    XLSX.writeFile(wb, 'hts-benchmark.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, unit.scaled ? 'sCRPS x1e-3' : 'sCRPS');
+    XLSX.writeFile(wb, unit.scaled ? 'hts-benchmark-x1e-3.xlsx' : 'hts-benchmark.xlsx');
   };
 
   // `.tablewrap` is the scroll container, so html2canvas would otherwise capture
@@ -160,7 +163,7 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
       });
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
-      link.download = 'hts-benchmark-table.png';
+      link.download = unit.scaled ? 'hts-benchmark-table-x1e-3.png' : 'hts-benchmark-table.png';
       link.click();
     } finally {
       wrap.style.overflow = saved.overflow;
@@ -180,10 +183,11 @@ export default function BenchmarkTable({ data, rankMap, styleMap }) {
         <div className="segmented">
           {MODES.map((m) => (
             <button key={m.key} data-active={mode === m.key} onClick={() => setMode(m.key)}>
-              {m.label}
+              {m.label ?? unit.label}
             </button>
           ))}
         </div>
+        {maximized && <UnitToggle compact />}
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px' }}>
           <button
             className="iconbtn"

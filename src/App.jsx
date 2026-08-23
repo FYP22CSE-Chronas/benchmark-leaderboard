@@ -6,6 +6,8 @@ import { buildStyleMap } from './lib/modelStyles.js';
 import BenchmarkTable from './components/BenchmarkTable.jsx';
 import Leaderboard from './components/Leaderboard.jsx';
 import LevelChart from './components/LevelChart.jsx';
+import UnitToggle from './components/UnitToggle.jsx';
+import { MILLI, useUnit } from './lib/units.jsx';
 
 const TABS = [
   { key: 'benchmark', label: 'Benchmark', Icon: Table2 },
@@ -15,6 +17,7 @@ const TABS = [
 
 export default function App() {
   const [tab, setTab] = useState('benchmark');
+  const unit = useUnit();
   const [scale, setScale] = useState('linear');
 
   const entries = useMemo(() => computeLeaderboard(data), []);
@@ -43,7 +46,7 @@ export default function App() {
         <div className="masthead__stats">
           <div className="stat">
             <div className="stat__k">Metric</div>
-            <div className="stat__v">{data.metric}</div>
+            <div className="stat__v">{unit.label}</div>
           </div>
           <div className="stat">
             <div className="stat__k">Models</div>
@@ -60,14 +63,17 @@ export default function App() {
         </div>
       </header>
 
-      <nav className="tabs">
-        {TABS.map(({ key, label, Icon }) => (
-          <button key={key} className="tab" data-active={tab === key} onClick={() => setTab(key)}>
-            <Icon size={13} strokeWidth={1.8} />
-            {label}
-          </button>
-        ))}
-      </nav>
+      <div className="navrow">
+        <nav className="tabs">
+          {TABS.map(({ key, label, Icon }) => (
+            <button key={key} className="tab" data-active={tab === key} onClick={() => setTab(key)}>
+              <Icon size={13} strokeWidth={1.8} />
+              {label}
+            </button>
+          ))}
+        </nav>
+        <UnitToggle />
+      </div>
 
       {tab === 'benchmark' && (
         <section className="section">
@@ -115,7 +121,7 @@ export default function App() {
             </div>
           </div>
           <p className="prose">
-            sCRPS at each individual level of the hierarchy — aggregate values are excluded.
+            {unit.label} at each individual level of the hierarchy — aggregate values are excluded.
           </p>
           <div className="chartgrid">
             {Object.entries(data.byLevel).map(([dataset, rows]) => (

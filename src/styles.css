@@ -125,12 +125,24 @@ button {
 
 /* ------------------------------------------------------------------ nav -- */
 
+.navrow {
+  display: flex;
+  align-items: center;
+  gap: 16px 20px;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
 .tabs {
   display: flex;
   gap: 0;
   border: 1px solid var(--line-strong);
-  margin-bottom: 34px;
   overflow-x: auto;
+}
+
+.navrow .tabs {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .tab {
@@ -160,6 +172,37 @@ button {
 .tab[data-active='true'] {
   background: var(--ink);
   color: var(--bg);
+}
+
+/* ------------------------------------------------------------ unit switch -- */
+
+.unitswitch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navrow .unitswitch {
+  margin-left: auto;
+}
+
+.unitswitch__cap {
+  color: var(--ink-3);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The options are written as sample values, so they must not be uppercased
+   or letter-spaced like the other segmented labels. */
+.unitswitch .segmented button {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 11px;
+  padding: 7px 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------- section -- */

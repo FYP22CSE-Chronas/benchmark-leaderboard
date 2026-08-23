@@ -3,6 +3,7 @@ import { Layers } from 'lucide-react';
 import { markerPath, isStrokeMarker, CHART_SURFACE } from '../lib/modelStyles.js';
 import SeriesGlyph from './SeriesGlyph.jsx';
 import { isNumber } from '../lib/scoring.js';
+import { useUnit } from '../lib/units.jsx';
 
 const W = 660;
 const H = 340;
@@ -36,14 +37,8 @@ function logTicks(min, max) {
   return ticks.length >= 2 ? ticks : [min, max];
 }
 
-const fmtTick = (v) => {
-  if (v === 0) return '0';
-  if (v >= 0.1) return v.toFixed(2);
-  if (v >= 0.01) return v.toFixed(3);
-  return v.toFixed(4);
-};
-
 export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
+  const unit = useUnit();
   const [hidden, setHidden] = useState(() => new Set());
   const [hover, setHover] = useState(null);
 
@@ -135,7 +130,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
           className="chart"
           viewBox={`0 0 ${W} ${H}`}
           role="img"
-          aria-label={`sCRPS by hierarchy level for ${dataset}`}
+          aria-label={`${unit.label} by hierarchy level for ${dataset}`}
           onMouseMove={handleMove}
           onMouseLeave={() => setHover(null)}
         >
@@ -147,7 +142,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
               <g key={t}>
                 <line className="grid-line" x1={PAD.left} y1={y} x2={PAD.left + PLOT_W} y2={y} />
                 <text x={PAD.left - 9} y={y + 3.2} textAnchor="end">
-                  {fmtTick(t)}
+                  {unit.formatTick(t)}
                 </text>
               </g>
             );
@@ -183,7 +178,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
             transform={`translate(13 ${PAD.top + PLOT_H / 2}) rotate(-90)`}
             textAnchor="middle"
           >
-            sCRPS{domain.log ? ' (log)' : ''}
+            {unit.label}{domain.log ? ' · log' : ''}
           </text>
 
           {/* hover crosshair */}
@@ -276,7 +271,7 @@ export default function LevelChart({ dataset, rows, models, styleMap, scale }) {
                   <SeriesGlyph style={styleMap.get(row.model)} width={18} />
                   {row.model}
                 </span>
-                <span className="tooltip__val">{row.value.toFixed(4)}</span>
+                <span className="tooltip__val">{unit.format(row.value)}</span>
               </div>
             ))}
           </div>
